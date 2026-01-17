@@ -1,7 +1,7 @@
 function MainContent() {
   return (
-    <main>
-    <p>I love to visit New York, Paris, and Tokyo.</p>
+  <main style={{padding : "6px"}}>
+    <p >I love to visit New York, Paris, and Tokyo.</p>
     </main>
   )
 }
