@@ -6,9 +6,7 @@ const AddRecipeForm = () => {
   const [steps, setSteps] = useState("");
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const validate = () => {
     const newErrors = {};
     if (!title.trim()) newErrors.title = "Title is required";
     if (!ingredients.trim() || ingredients.split("\n").length < 2)
@@ -16,8 +14,15 @@ const AddRecipeForm = () => {
     if (!steps.trim() || steps.split("\n").length < 1)
       newErrors.steps = "Enter at least 1 preparation step";
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+    return newErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
 
@@ -34,6 +39,7 @@ const AddRecipeForm = () => {
     <div className="max-w-2xl mx-auto my-10 bg-white p-6 rounded-2xl shadow-md">
       <h2 className="text-2xl font-bold mb-6 text-center">Add a New Recipe</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
+
         <div>
           <label className="block font-medium mb-1" htmlFor="title">
             Recipe Title
