@@ -7,8 +7,12 @@ function PostsComponent() {
     return response.json();
   };
 
-
-  const { data, isLoading, isError, error, refetch } = useQuery("posts", fetchPosts);
+  const { data, isLoading, isError, error, refetch } = useQuery("posts", fetchPosts, {
+    cacheTime: 1000 * 60 * 5,          
+    staleTime: 1000 * 60 * 1,         
+    refetchOnWindowFocus: false,       
+    keepPreviousData: true              
+  });
 
   if (isLoading) {
     return <p>Loading posts...</p>;
