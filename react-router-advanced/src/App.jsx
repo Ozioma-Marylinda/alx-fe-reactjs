@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        
+
         <Route
           path="/profile/*"
           element={
@@ -26,7 +26,7 @@ function App() {
           <Route path="settings" element={<ProfileSettings />} />
         </Route>
 
-        <Route path="/blog/:postId" element={<BlogPost />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
