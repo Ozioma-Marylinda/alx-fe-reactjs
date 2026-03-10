@@ -4,7 +4,7 @@ import { fetchUsers } from "../services/githubService";
 function Search() {
   const [username, setUsername] = useState("");
   const [location, setLocation] = useState("");
-  const [repos, setRepos] = useState("");
+  const [minRepos, setMinRepos] = useState("");
 
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
@@ -20,7 +20,7 @@ function Search() {
     setPage(1);
 
     try {
-      const data = await fetchUsers(username, location, repos, 1);
+      const data = await fetchUsers(username, location, minRepos, 1);
       setUsers(data.items);
     } catch {
       setError("Looks like we cant find the user");
@@ -33,7 +33,7 @@ function Search() {
     const nextPage = page + 1;
     setPage(nextPage);
 
-    const data = await fetchUsers(username, location, repos, nextPage);
+    const data = await fetchUsers(username, location, minRepos, nextPage);
     setUsers((prev) => [...prev, ...data.items]);
   };
 
@@ -66,8 +66,8 @@ function Search() {
           type="number"
           placeholder="Min Repositories"
           className="border p-2 rounded"
-          value={repos}
-          onChange={(e) => setRepos(e.target.value)}
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
         />
 
         <button
@@ -100,6 +100,7 @@ function Search() {
               <a
                 href={user.html_url}
                 target="_blank"
+                rel="noreferrer"
                 className="text-blue-500"
               >
                 View Profile
