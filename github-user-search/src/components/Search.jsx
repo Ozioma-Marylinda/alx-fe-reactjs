@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchUsers } from "../services/githubService";
+import { fetchUserData } from "../services/githubService";
 
 function Search() {
   const [username, setUsername] = useState("");
@@ -20,7 +20,7 @@ function Search() {
     setPage(1);
 
     try {
-      const data = await fetchUsers(username, location, minRepos, 1);
+      const data = await fetchUserData(username, location, minRepos, 1);
       setUsers(data.items);
     } catch {
       setError("Looks like we cant find the user");
@@ -33,7 +33,7 @@ function Search() {
     const nextPage = page + 1;
     setPage(nextPage);
 
-    const data = await fetchUsers(username, location, minRepos, nextPage);
+    const data = await fetchUserData(username, location, minRepos, nextPage);
     setUsers((prev) => [...prev, ...data.items]);
   };
 

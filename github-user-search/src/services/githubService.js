@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const fetchUsers = async (username, location, minRepos) => {
+export const fetchUserData = async (username, location, minRepos, page = 1) => {
 
   let query = `${username}`;
 
@@ -13,7 +13,7 @@ export const fetchUsers = async (username, location, minRepos) => {
   }
 
   const response = await axios.get(
-    `https://api.github.com/search/users?q=${query}`
+    `https://api.github.com/search/users?q=${query}&page=${page}&per_page=10`
   );
 
   return response.data;
